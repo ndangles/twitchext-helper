@@ -49,15 +49,15 @@ const default_options = {
 
 "jwt_secret" -> Holds configurable options for when dealing with a jwt secret
 
-      "encoded" -> default is to assume the secret is base64 encoded and will decode for you, unless it is set to false which it will then     assume you have decoded yourself before passing into the function or stored in a file
+"encoded" -> default is to assume the secret is base64 encoded and will decode for you, unless it is set to false which it will then     assume you have decoded yourself before passing into the function or stored in a file
 
-      "expires" -> Used for signing tokens
+"expires" -> Used for signing tokens
 
-      "enabled" -> when set to true, it will expect 'method' and 'location' to be filled. This allows you to point to a file where a jwt_secret variable is defined. This helps save from having to pass this value into every function that requires a jwt_secret. When set to false, a jwt secret will be expected to be passed into functions that require it
+"enabled" -> when set to true, it will expect 'method' and 'location' to be filled. This allows you to point to a file where a jwt_secret variable is defined. This helps save from having to pass this value into every function that requires a jwt_secret. When set to false, a jwt secret will be expected to be passed into functions that require it
 
-      "method" -> 'path' is the only option available for now (environment variable coming soon). This informs the module that you would like it to grab the jwt secret from a file defined in 'location'.
+"method" -> 'path' is the only option available for now (environment variable coming soon). This informs the module that you would like it to grab the jwt secret from a file defined in 'location'.
 
-      "location" -> This should be filled with an 'absolute' path to a file holding a variable called 'jwt_secret'. See examples below
+"location" -> This should be filled with an 'absolute' path to a file holding a variable called 'jwt_secret'. See examples below
 
 "client_id" -> This lets you set the client_id of your extensions once. When kept as default 'null' then it is expected for you to pass this value to every function that required it
 
@@ -150,7 +150,7 @@ NOTE: Configuration is all or nothing. If you want to pass configuration options
 
  - `sign`
 
- 	-> signs data and create a json web token
+ 	-> signs data and creates a json web token
 
   Example:
   ```js
@@ -158,6 +158,8 @@ NOTE: Configuration is all or nothing. If you want to pass configuration options
 
   var signedToken = twitchext.sign(data, "some secret here", 1503343947); //with default configuration
   ```
+
+<br><br>
 
 
   - `verify`
@@ -178,6 +180,9 @@ NOTE: Configuration is all or nothing. If you want to pass configuration options
    ```
 
 
+<br><br>
+
+
    - `decode`
 
     -> Simplies decode the json web token without verification
@@ -186,6 +191,10 @@ NOTE: Configuration is all or nothing. If you want to pass configuration options
     ```js
     twitchext.decode(signed) //Any configuration
     ```
+
+
+<br><br>
+
 
     - `id2name`
 
@@ -204,6 +213,10 @@ NOTE: Configuration is all or nothing. If you want to pass configuration options
      }); //Default configuration
      ```
 
+
+<br><br>
+
+
      - `name2id`
 
       -> Calls twitch api to resolve a display name to a user id
@@ -220,6 +233,10 @@ NOTE: Configuration is all or nothing. If you want to pass configuration options
         console.log(id);
       }); //Default configuration
       ```
+
+
+<br><br>
+
 
       - `getStream`
 
