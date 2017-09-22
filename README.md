@@ -217,20 +217,20 @@ NOTE: Configuration is all or nothing. If you want to pass configuration options
 <br><br>
 
 
-   - `name2id`
+  - `name2id`
 
     -> Calls twitch api to resolve a display name to a user id
 
     Example:
     ```js
     twitchext.name2id("ncd275", function(err, id){
-      if(err){return console.log(err);}
-      console.log(id);
+    if(err){return console.log(err);}
+    console.log(id);
     }); //Custom configuration
 
     twitchext.name2id("ncd275", "some client id here", function(err, id){
-      if(err){return console.log(err)}
-      console.log(id);
+    if(err){return console.log(err)}
+    console.log(id);
     }); //Default configuration
     ```
 
