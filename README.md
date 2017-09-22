@@ -148,7 +148,7 @@ NOTE: Configuration is all or nothing. If you want to pass configuration options
  Functions
  -------
 
- - <h4>`sign`</h4>
+ - `sign`
 
  	-> signs data and creates a json web token
 
@@ -185,7 +185,7 @@ NOTE: Configuration is all or nothing. If you want to pass configuration options
 
   - `decode`
 
-  -> Simplies decode the json web token without verification
+    -> Simplies decode the json web token without verification
 
   Example:
   ```js
@@ -238,22 +238,22 @@ NOTE: Configuration is all or nothing. If you want to pass configuration options
 <br><br>
 
 
-    - `getStream`
+  - `getStream`
 
-     -> Calls twitch api to retrieve a user's current streaming information if they are currently streaming
+   -> Calls twitch api to retrieve a user's current streaming information if they are currently streaming
 
-     Example:
-     ```js
-     twitchext.getStream("102705463", function(err, stream){
-       if(err){return console.log(err)}
-       console.log(stream)
-     }); //Custom configuration
+   Example:
+   ```js
+   twitchext.getStream("102705463", function(err, stream){
+     if(err){return console.log(err)}
+     console.log(stream)
+   }); //Custom configuration
 
-     twitchext.getStream("102705463", function(err, stream){
-       if(err){return console.log(err)}
-       console.log(stream)
-     }); //Default configuration
-     ```
+   twitchext.getStream("102705463", function(err, stream){
+     if(err){return console.log(err)}
+     console.log(stream)
+   }); //Default configuration
+   ```
 
 
 
