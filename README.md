@@ -148,7 +148,7 @@ NOTE: Configuration is all or nothing. If you want to pass configuration options
  Functions
  -------
 
- - `<h4>sign</h4>`
+ - <h4>`sign`</h4>
 
  	-> signs data and creates a json web token
 
@@ -162,7 +162,7 @@ NOTE: Configuration is all or nothing. If you want to pass configuration options
 <br><br>
 
 
-  - `<h4>verify</h4>`
+  - `verify`
 
    -> verifies the validity of the json web token
 
@@ -183,7 +183,7 @@ NOTE: Configuration is all or nothing. If you want to pass configuration options
 <br><br>
 
 
-  - `<h4>decode</h4>`
+  - `decode`
 
   -> Simplies decode the json web token without verification
 
@@ -196,7 +196,7 @@ NOTE: Configuration is all or nothing. If you want to pass configuration options
 <br><br>
 
 
-  - `<h4>id2name</h4>`
+  - `id2name`
 
    -> Calls twitch api to resolve a user ID to its associated display name
 
@@ -217,7 +217,7 @@ NOTE: Configuration is all or nothing. If you want to pass configuration options
 <br><br>
 
 
-   - `<h4>name2id</h4>`
+   - `name2id`
 
     -> Calls twitch api to resolve a display name to a user id
 
@@ -238,7 +238,7 @@ NOTE: Configuration is all or nothing. If you want to pass configuration options
 <br><br>
 
 
-    - `<h4>getStream</h4>`
+    - `getStream`
 
      -> Calls twitch api to retrieve a user's current streaming information if they are currently streaming
 
