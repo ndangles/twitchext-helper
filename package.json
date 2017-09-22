@@ -5,6 +5,27 @@
   "main": "index.js",
   "author": "Nicholas Dangles",
   "license": "ISC",
+  "repository": {
+  "type": "git",
+  "url": "git+https://github.com/ndangles/twitchext-helper.git"
+},
+"keywords": [
+  "twitch",
+  "twitch helper",
+  "twitch extensions",
+  "twitchext",
+  "twitchext-helper",
+  "twitchext helper",
+  "twitch extension helper",
+  "twitch tv"
+],
+"author": "Nicholas Dangles",
+"license": "ISC",
+"bugs": {
+  "url": "https://github.com/ndangles/twitchext-helper/issues"
+},
+"readme": "README.md",
+"homepage": "https://github.com/ndangles/twitchext-helper#readme",
   "dependencies": {
     "jsonwebtoken": "^8.0.1"
   }
