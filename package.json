@@ -1,7 +1,7 @@
 {
   "name": "twitchext-helper",
   "version": "1.0.0",
-  "description": "(IN TESTING) A node module that offers functions to assist with creating Twitch Extensions",
+  "description": "A node module that offers functions to assist with creating Twitch Extensions",
   "main": "index.js",
   "author": "Nicholas Dangles",
   "license": "ISC",
