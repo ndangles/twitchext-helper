@@ -148,7 +148,7 @@ NOTE: Configuration is all or nothing. If you want to pass configuration options
  Functions
  -------
 
- - `sign`
+ - `<h4>sign</h4>`
 
  	-> signs data and creates a json web token
 
@@ -162,7 +162,7 @@ NOTE: Configuration is all or nothing. If you want to pass configuration options
 <br><br>
 
 
-  - `verify`
+  - `<h4>verify</h4>`
 
    -> verifies the validity of the json web token
 
@@ -183,77 +183,77 @@ NOTE: Configuration is all or nothing. If you want to pass configuration options
 <br><br>
 
 
-   - `decode`
+  - `<h4>decode</h4>`
 
-    -> Simplies decode the json web token without verification
+  -> Simplies decode the json web token without verification
+
+  Example:
+  ```js
+  twitchext.decode(signed) //Any configuration
+  ```
+
+
+<br><br>
+
+
+  - `<h4>id2name</h4>`
+
+   -> Calls twitch api to resolve a user ID to its associated display name
+
+   Example:
+   ```js
+   twitchext.id2name("102705463", function(err, name){
+     if(err){return console.log(err)}
+     console.log(name);
+   }); //Custom configuration
+
+   twitchext.id2name("102705463", "some client id here", function(err, name){
+     if(err){return console.log(err)}
+     console.log(name);
+   }); //Default configuration
+   ```
+
+
+<br><br>
+
+
+   - `<h4>name2id</h4>`
+
+    -> Calls twitch api to resolve a display name to a user id
 
     Example:
     ```js
-    twitchext.decode(signed) //Any configuration
+    twitchext.name2id("ncd275", function(err, id){
+      if(err){return console.log(err);}
+      console.log(id);
+    }); //Custom configuration
+
+    twitchext.name2id("ncd275", "some client id here", function(err, id){
+      if(err){return console.log(err)}
+      console.log(id);
+    }); //Default configuration
     ```
 
 
 <br><br>
 
 
-    - `id2name`
+    - `<h4>getStream</h4>`
 
-     -> Calls twitch api to resolve a user ID to its associated display name
+     -> Calls twitch api to retrieve a user's current streaming information if they are currently streaming
 
      Example:
      ```js
-     twitchext.id2name("102705463", function(err, name){
+     twitchext.getStream("102705463", function(err, stream){
        if(err){return console.log(err)}
-       console.log(name);
+       console.log(stream)
      }); //Custom configuration
 
-     twitchext.id2name("102705463", "some client id here", function(err, name){
+     twitchext.getStream("102705463", function(err, stream){
        if(err){return console.log(err)}
-       console.log(name);
+       console.log(stream)
      }); //Default configuration
      ```
-
-
-<br><br>
-
-
-     - `name2id`
-
-      -> Calls twitch api to resolve a display name to a user id
-
-      Example:
-      ```js
-      twitchext.name2id("ncd275", function(err, id){
-        if(err){return console.log(err);}
-        console.log(id);
-      }); //Custom configuration
-
-      twitchext.name2id("ncd275", "some client id here", function(err, id){
-        if(err){return console.log(err)}
-        console.log(id);
-      }); //Default configuration
-      ```
-
-
-<br><br>
-
-
-      - `getStream`
-
-       -> Calls twitch api to retrieve a user's current streaming information if they are currently streaming
-
-       Example:
-       ```js
-       twitchext.getStream("102705463", function(err, stream){
-         if(err){return console.log(err)}
-         console.log(stream)
-       }); //Custom configuration
-
-       twitchext.getStream("102705463", function(err, stream){
-         if(err){return console.log(err)}
-         console.log(stream)
-       }); //Default configuration
-       ```
 
 
 
