@@ -1,7 +1,7 @@
 Node.js: twitchext-helper
 =================
 
-Twitchext Helper is a module that exposes functions that helps with creating twitch extensions. This module aims to help keep clean code by take common tidious task and making them simpler.
+Twitchext Helper is a module that exposes functions that helps with creating twitch extensions. This module aims to help keep clean code by taking common tidious tasks and making them a bit simpler.
 
 
 Why?
@@ -70,7 +70,7 @@ const custom_options = {
     "expires": 1503343947,
     "enabled": true,
     "method":"path",
-    "location": "/Users/ncd275/Projects/SomeExtension/backend/config/variables"
+    "location": "/Users/ncd275/Projects/SomeExtension/backend/config/variables" // Example variables.js would be 'module.exports = { "jwt_secret": "nnQvIn6EaPuOM3hn3xtjez9cHc7xDvaQD+48B59Powq=" }'
   },
   "client_id": "8eard7sknnl7a14z92hn33gzi72bt1" //not real, unless I got lucky
 }
