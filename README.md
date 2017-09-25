@@ -157,7 +157,7 @@ These are the currently available functions listed below and examples on how to 
 Note: someMethod(param1, [, param2], [, param3]). [, ] signifies that this could be an optional parameter if the appropriate custom options are set otherwise it is a required parameter.
 
 
- - ### sign(data, [, secret], [, expires])
+ - <h3> sign(data, [, secret], [, expires]) </h3>
 
  	-> signs data and creates a json web token
 
