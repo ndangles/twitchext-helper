@@ -117,7 +117,7 @@ var options = options || default_options;
                       var error = null;
                       if(JSON.parse(body.toString()).display_name == undefined){
                           error = "Could not resolve user ID to a display name";
-                          callback(error, undefined)
+                          callback(error, null)
                       } else {
                         callback(error, JSON.parse(body.toString()).display_name)
                       }
@@ -157,7 +157,7 @@ var options = options || default_options;
                       var error = null;
                       if(JSON.parse(body.toString())._total < 1){
                         error = "Could not resolve name to an ID"
-                        callback(error, undefined)
+                        callback(error, null)
                       } else {
                         callback(error, JSON.parse(body.toString()).users[0]._id)
                       }
@@ -201,7 +201,7 @@ var options = options || default_options;
                           callback(error, JSON.parse(body.toString()));
                         }else{
                           error = "Could not retrieve stream information based on provided user ID. User may not be live or does not exist"
-                          callback(error, undefined);
+                          callback(error, null);
                         }
 
                       })

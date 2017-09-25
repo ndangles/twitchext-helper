@@ -42,7 +42,8 @@ const default_options = {
     "location": null
   },
 
-  "client_id": null
+  "client_id": null,
+  "client_secret": null
 };
 ```
 
@@ -72,7 +73,8 @@ const custom_options = {
     "method":"path",
     "location": "/Users/ncd275/Projects/SomeExtension/backend/config/variables" // Example variables.js would be 'module.exports = { "jwt_secret": "nnQvIn6EaPuOM3hn3xtjez9cHc7xDvaQD+48B59Powq=" }'
   },
-  "client_id": "8eard7sknnl7a14z92hn33gzi72bt1" //not real, unless I got lucky
+  "client_id": "8eard7sknnl7a14z92hn33gzi72bt1", //not real, unless I got lucky
+  "client_secret": "4tuyjk09zn0lfghoiw8951nnrs234"
 }
 
 const twitchext = require('twitchext-helper')(custom_options);
@@ -142,13 +144,18 @@ function name2id(user_name, client_id){
 ```
 This is where using twitchext-helper for api calls can help clean up code
 
-NOTE: Configuration is all or nothing. If you want to pass configuration options to the module then you need to fill out all fields. Hopefully will be changing this soon.
+NOTE: Configuration is all or nothing. If you want to pass configuration options to the module then you need to fill out all fields. Hopefully will be changing this soon. I recommend filling all of the options to make the use of the module and its functions a lot more simpler.
 
 
  Functions
  -------
 
- - ### sign
+These are the currently available functions listed below and examples on how to use them. Again, I recommend passing custom options to the module to make use of these more simple.
+
+Note: someMethod(param1, [, param2], [, param3]). [, ] signifies that this could be an optional parameter if the appropriate custom options are set otherwise it is a required parameter.
+
+
+ - ### sign(data, [, secret], [, expires])
 
  	-> signs data and creates a json web token
 
@@ -162,7 +169,7 @@ NOTE: Configuration is all or nothing. If you want to pass configuration options
 <br><br>
 
 
-  - `verify`
+  - ### verify(data, [, jwt secret], [, callback])
 
    -> verifies the validity of the json web token
 
@@ -183,9 +190,9 @@ NOTE: Configuration is all or nothing. If you want to pass configuration options
 <br><br>
 
 
-  - `decode`
+  ### decode(data)
 
-    -> Simplies decode the json web token without verification
+    -> Simply decodes the json web token without verification
 
   Example:
   ```js
@@ -196,7 +203,7 @@ NOTE: Configuration is all or nothing. If you want to pass configuration options
 <br><br>
 
 
-  - `id2name`
+  - ### id2name(user_id, [, client_id], [, callback])
 
    -> Calls twitch api to resolve a user ID to its associated display name
 
@@ -217,7 +224,7 @@ NOTE: Configuration is all or nothing. If you want to pass configuration options
 <br><br>
 
 
-  - `name2id`
+  - ### name2id(user_name, [, client_id], [, callback])
 
     -> Calls twitch api to resolve a display name to a user id
 
@@ -238,7 +245,7 @@ NOTE: Configuration is all or nothing. If you want to pass configuration options
 <br><br>
 
 
-  - `getStream`
+  - ### getStream(user_id, [, client_id], [, callback])
 
    -> Calls twitch api to retrieve a user's current streaming information if they are currently streaming
 
@@ -254,6 +261,89 @@ NOTE: Configuration is all or nothing. If you want to pass configuration options
      console.log(stream)
    }); //Default configuration
    ```
+
+
+ <br><br>
+
+
+   - ### sendPubSub(channel_id, signedToken, data, targets, [, client_id], [, callback])
+
+    -> " Twitch provides a publish-subscribe system for your EBS to communicate with both the broadcaster and viewers. Calling this endpoint forwards your message using the same mechanism as the send() function in the JavaScript helper API." - Twitch Documentation. This method achieves this in a more simple and cleaner way. See https://dev.twitch.tv/docs/extensions/reference#send-extension-pubsub-message
+
+    Example:
+    ```js
+    var targets = ["broadcast"];
+    var signedToken = twitchext.sign({channel_id: "102705463", role: "external", pubsub_perms: { listen: [ 'broadcast' ], send: [ '*' ]}});
+    var data = {"message": "here is some message"}
+
+    twitchext.sendPubSub("102705463", signedToken, targets, data, function(response){
+      console.log(response);
+    }); //Custom configuration
+
+    twitchext.sendPubSub("102705463", signedToken, targets, data, "some client id" function(response){
+      console.log(response);
+    });//Default configuration
+    ```
+
+
+<br><br>
+
+
+  - ### getAccesToken(oauthCode, redirect_uri, [, client_id], [, client_secret] , [, callback])
+
+   -> This function gets the access token required to perform actions or access data on the user's behalf. This is useful for when you have Oauth scopes defined for your extension under "Extension Capabilities". When a user of your extension tries to activate the extension, it will ask for their authorization and if successful return a oauth code, this function then takes that oauth code and makes the necessary request to exchange that code for an access token which is what is actually used to make request on behalf of that user later.
+
+   Example:
+   ```js
+
+   app.get('/oauth', function(req, res){
+     var oauthCode = req.query.code;
+
+       twitchext.getAccessToken(oauthCode, "https://localhost/oauth", function(err, token){
+         if(err){console.log(err)};
+
+         console.log(token); // save to database if needed
+       }); //Custom configuration
+
+       twitchext.getAccessToken(oauthCode, "https://localhost/oauth", "some client id", "some client secret", function(err, token){
+         if(err){console.log(err)};
+
+         console.log(token);
+       }); //Default configuration
+
+   });
+
+   ```
+
+
+   <br><br>
+
+
+     - ### oauthReceipt(channel_id, signed_token, extension_version, response_object, [, client_id], [, callback])
+
+      -> This function sends a oauth receipt to twitch notifying them that you have successfully received oauth authorization from the user and should allow activation of the extension. Should be used after 'getAccessToken'.
+
+      Example:
+      ```js
+      app.get('/oauth', function(req, res){
+
+          var channelId = JSON.parse(req.query.state).channel_id;
+          var signedToken = twitchext.sign({"user_id": "102705463", "role": "external"});
+
+          twitchext.oauthReceipt(channelId, signedToken, "0.0.1", res, function(err, response){
+            if(err){console.log(err)}
+             console.log(response); // "success"
+
+          });//Custom configuration
+
+          twitchext.oauthReceipt(channelId, signedToken, "0.0.1", res, "some client id", function(err, response){
+            if(err){console.log(err)}
+             console.log(response); // "success"
+
+          });//Default configuration
+      });
+
+      ```
 
 
 
