@@ -318,34 +318,34 @@ Note: someMethod(param1, [, param2], [, param3]). [, ] signifies that this could
    ```
 
 
- <br><br>
+<br><br>
 
 
-   - ### oauthReceipt(channel_id, signed_token, extension_version, response_object, [, client_id], [, callback])
+ - ### oauthReceipt(channel_id, signed_token, extension_version, response_object, [, client_id], [, callback])
 
-    -> This function sends a oauth receipt to twitch notifying them that you have successfully received oauth authorization from the user and should allow activation of the extension. Should be used after 'getAccessToken'.
+  -> This function sends a oauth receipt to twitch notifying them that you have successfully received oauth authorization from the user and should allow activation of the extension. Should be used after 'getAccessToken'.
 
-    Example:
-    ```js
-    app.get('/oauth', function(req, res){
+  Example:
+  ```js
+  app.get('/oauth', function(req, res){
 
-        var channelId = JSON.parse(req.query.state).channel_id;
-        var signedToken = twitchext.sign({"user_id": "102705463", "role": "external"});
+      var channelId = JSON.parse(req.query.state).channel_id;
+      var signedToken = twitchext.sign({"user_id": "102705463", "role": "external"});
 
-        twitchext.oauthReceipt(channelId, signedToken, "0.0.1", res, function(err, response){
-          if(err){console.log(err)}
-           console.log(response); // "success"
+      twitchext.oauthReceipt(channelId, signedToken, "0.0.1", res, function(err, response){
+        if(err){console.log(err)}
+         console.log(response); // "success"
 
-        });//Custom configuration
+      });//Custom configuration
 
-        twitchext.oauthReceipt(channelId, signedToken, "0.0.1", res, "some client id", function(err, response){
-          if(err){console.log(err)}
-           console.log(response); // "success"
+      twitchext.oauthReceipt(channelId, signedToken, "0.0.1", res, "some client id", function(err, response){
+        if(err){console.log(err)}
+         console.log(response); // "success"
 
-        });//Default configuration
-    });
+      });//Default configuration
+  });
 
-    ```
+  ```
 
 
 
