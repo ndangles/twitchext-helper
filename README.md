@@ -148,7 +148,7 @@ NOTE: Configuration is all or nothing. If you want to pass configuration options
  Functions
  -------
 
- - `sign`
+ - ###sign
 
  	-> signs data and creates a json web token
 

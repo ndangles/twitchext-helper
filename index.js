@@ -283,7 +283,7 @@ var options = options || default_options;
                   var reqOpts = {
                     hostname: 'api.twitch.tv',
                     port: 443,
-                    path: '/extensions/'+client_id+'/'+version+'/oauth_receipt?channel_id='+channelId,
+                    path: '/extensions/'+client_id+'/'+version+'/oauth_receipt?channel_id='+channel_id,
                     method: 'PUT',
                     headers: {
                           'Client-Id': client_id,
