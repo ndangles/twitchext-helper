@@ -60,7 +60,9 @@ const default_options = {
 
 "location" -> This should be filled with an 'absolute' path to a file holding a variable called 'jwt_secret'. See examples below
 
-"client_id" -> This lets you set the client_id of your extensions once. When kept as default 'null' then it is expected for you to pass this value to every function that required it
+"client_id" -> This lets you set the client_id of your extensions once. When kept as default 'null' then it is expected for you to pass this value to every function that requires it
+
+"client_secret" -> This lets you set the client_secret of your extension. When kept as default 'null' then it is expected for you to pass this value to every function that requires it
 
 
 Example Custom Configuration Usage:
@@ -161,9 +163,9 @@ Note: someMethod(param1, [, param2], [, param3]). [, ] signifies that this could
 
   Example:
   ```js
-  var signedToken = twitchext.sign(data); //with custom configuration
+  var signedToken = twitchext.sign(data); //Custom configuration
 
-  var signedToken = twitchext.sign(data, "some secret here", 1503343947); //with default configuration
+  var signedToken = twitchext.sign(data, "some secret here", 1503343947); //Default configuration
   ```
 
 <br><br>
@@ -175,15 +177,17 @@ Note: someMethod(param1, [, param2], [, param3]). [, ] signifies that this could
 
    Example:
    ```js
+   //Custom configuration
    twitchext.verify(signedToken, function(err, decoded){
        if(err){throw err;}
        console.log(decoded);
-   }); //with custom configuration
+   });
 
+   //Default configuration
    twitchext.verify(signedToken, "some secret here", function(err, decoded){
        if(err){throw err;}
        console.log(decoded);
-   }); //with default configuration
+   });
    ```
 
 
@@ -209,15 +213,17 @@ Note: someMethod(param1, [, param2], [, param3]). [, ] signifies that this could
 
    Example:
    ```js
+   //Custom configuration
    twitchext.id2name("102705463", function(err, name){
      if(err){return console.log(err)}
      console.log(name);
-   }); //Custom configuration
+   });
 
+   //Default configuration
    twitchext.id2name("102705463", "some client id here", function(err, name){
      if(err){return console.log(err)}
      console.log(name);
-   }); //Default configuration
+   });
    ```
 
 
@@ -230,15 +236,17 @@ Note: someMethod(param1, [, param2], [, param3]). [, ] signifies that this could
 
     Example:
     ```js
+    //Custom configuration
     twitchext.name2id("ncd275", function(err, id){
     if(err){return console.log(err);}
     console.log(id);
-    }); //Custom configuration
+    });
 
+    //Default configuration
     twitchext.name2id("ncd275", "some client id here", function(err, id){
     if(err){return console.log(err)}
     console.log(id);
-    }); //Default configuration
+    });
     ```
 
 
@@ -251,15 +259,17 @@ Note: someMethod(param1, [, param2], [, param3]). [, ] signifies that this could
 
    Example:
    ```js
+   //Custom configuration
    twitchext.getStream("102705463", function(err, stream){
      if(err){return console.log(err)}
      console.log(stream)
-   }); //Custom configuration
+   });
 
+   //Default configuration
    twitchext.getStream("102705463", "8eard7sknnl7a14z92hn33gzi72bt1", function(err, stream){
      if(err){return console.log(err)}
      console.log(stream)
-   }); //Default configuration
+   });
    ```
 
 
@@ -276,14 +286,15 @@ Note: someMethod(param1, [, param2], [, param3]). [, ] signifies that this could
   var signedToken = twitchext.sign({channel_id: "102705463", role: "external", pubsub_perms: { listen: [ 'broadcast' ], send: [ '*' ]}});
   var data = {"message": "here is some message"}
 
+  //Custom configuration
   twitchext.sendPubSub("102705463", signedToken, targets, data, function(response){
     console.log(response);
-  }); //Custom configuration
+  });
 
-
+  //Default configuration
   twitchext.sendPubSub("102705463", signedToken, targets, data, "some client id" function(response){
     console.log(response);
-  });//Default configuration
+  });
   ```
 
 
@@ -298,20 +309,21 @@ Note: someMethod(param1, [, param2], [, param3]). [, ] signifies that this could
    ```js
 
    app.get('/oauth', function(req, res){
-     var oauthCode = req.query.code;
+        var oauthCode = req.query.code;
 
+        //Custom configuration
        twitchext.getAccessToken(oauthCode, "https://localhost/oauth", function(err, token){
          if(err){console.log(err)};
 
          console.log(token); // save to database if needed
-       }); //Custom configuration
+       });
 
-
+       //Default configuration
        twitchext.getAccessToken(oauthCode, "https://localhost/oauth", "some client id", "some client secret", function(err, token){
          if(err){console.log(err)};
 
          console.log(token);
-       }); //Default configuration
+       });
 
    });
 
@@ -332,17 +344,19 @@ Note: someMethod(param1, [, param2], [, param3]). [, ] signifies that this could
       var channelId = JSON.parse(req.query.state).channel_id;
       var signedToken = twitchext.sign({"user_id": "102705463", "role": "external"});
 
+      //Custom configuration
       twitchext.oauthReceipt(channelId, signedToken, "0.0.1", res, function(err, response){
         if(err){console.log(err)}
          console.log(response); // "success"
 
-      });//Custom configuration
+      });
 
+      //Default configuration
       twitchext.oauthReceipt(channelId, signedToken, "0.0.1", res, "some client id", function(err, response){
         if(err){console.log(err)}
          console.log(response); // "success"
 
-      });//Default configuration
+      });
   });
 
   ```
