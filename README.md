@@ -171,7 +171,7 @@ Note: someMethod(param1, [, param2], [, param3]). [, ] signifies that this could
 <br><br>
 
 
-  - ### verify(data, [, jwt secret], [, callback])
+  - <h3> verify(data, [, jwt secret], [, callback]) </h3>
 
    -> verifies the validity of the json web token
 
@@ -194,7 +194,7 @@ Note: someMethod(param1, [, param2], [, param3]). [, ] signifies that this could
 <br><br>
 
 
-  ### decode(data)
+  - <h3> decode(data) </h3>
 
   -> Simply decodes the json web token without verification
 
@@ -207,7 +207,7 @@ Note: someMethod(param1, [, param2], [, param3]). [, ] signifies that this could
 <br><br>
 
 
-  - ### id2name(user_id, [, client_id], [, callback])
+  - <h3> id2name(user_id, [, client_id], [, callback]) </h3>
 
   -> Calls twitch api to resolve a user ID to its associated display name
 
@@ -230,7 +230,7 @@ Note: someMethod(param1, [, param2], [, param3]). [, ] signifies that this could
 <br><br>
 
 
-  - ### name2id(user_name, [, client_id], [, callback])
+  - <h3> name2id(user_name, [, client_id], [, callback]) </h3>
 
     -> Calls twitch api to resolve a display name to a user id
 
@@ -253,7 +253,7 @@ Note: someMethod(param1, [, param2], [, param3]). [, ] signifies that this could
 <br><br>
 
 
-  - ### getStream(user_id, [, client_id], [, callback])
+  - <h3> getStream(user_id, [, client_id], [, callback]) </h3>
 
    -> Calls twitch api to retrieve a user's current streaming information if they are currently streaming
 
@@ -276,7 +276,7 @@ Note: someMethod(param1, [, param2], [, param3]). [, ] signifies that this could
 <br><br>
 
 
- - ### sendPubSub(channel_id, signedToken, data, targets, [, client_id], [, callback])
+ - <h3> sendPubSub(channel_id, signedToken, data, targets, [, client_id], [, callback]) </h3>
 
   -> "Twitch provides a publish-subscribe system for your EBS to communicate with both the broadcaster and viewers. Calling this endpoint forwards your message using the same mechanism as the send() function in the JavaScript helper API." - Twitch Documentation. This method achieves this in a more simple and cleaner way. See https://dev.twitch.tv/docs/extensions/reference#send-extension-pubsub-message
 
@@ -301,7 +301,7 @@ Note: someMethod(param1, [, param2], [, param3]). [, ] signifies that this could
 <br><br>
 
 
-  - ### getAccesToken(oauthCode, redirect_uri, [, client_id], [, client_secret] , [, callback])
+  - <h3> getAccesToken(oauthCode, redirect_uri, [, client_id], [, client_secret] , [, callback]) </h3>
 
    -> This function gets the access token required to perform actions or access data on the user's behalf. This is useful for when you have Oauth scopes defined for your extension under "Extension Capabilities". When a user of your extension tries to activate the extension, it will ask for their authorization and if successful return a oauth code, this function then takes that oauth code and makes the necessary request to exchange that code for an access token which is what is actually used to make request on behalf of that user later.
 
@@ -333,7 +333,7 @@ Note: someMethod(param1, [, param2], [, param3]). [, ] signifies that this could
 <br><br>
 
 
- - ### oauthReceipt(channel_id, signed_token, extension_version, response_object, [, client_id], [, callback])
+ - <h3> oauthReceipt(channel_id, signed_token, extension_version, response_object, [, client_id], [, callback]) </h3>
 
   -> This function sends a oauth receipt to twitch notifying them that you have successfully received oauth authorization from the user and should allow activation of the extension. Should be used after 'getAccessToken'.
 
