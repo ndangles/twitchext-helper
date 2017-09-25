@@ -207,6 +207,57 @@ var options = options || default_options;
 
                 });
                 req.end();
+    },
+
+    sendPubSub: function(channel_id, signedToken, data, targets, client_id, callback) {
+                var client_id = client_id || null;
+
+                if(typeof client_id == "function"){callback=client_id}
+
+                if(options.client_id != null){
+                  client_id = options.client_id
+                }
+
+
+                var postData = JSON.stringify({
+
+                      content_type:"application/json",
+                      message:JSON.stringify(data),
+                      targets:targets
+
+                });
+
+                var options = {
+                  hostname: 'api.twitch.tv',
+                  port: 443,
+                  path: '/extensions/message/'+channel_id,
+                  method: 'POST',
+                  headers: {
+                        'Client-Id': client_id,
+                        'Content-Type': 'application/json',
+                        'Content-Length':postData.length,
+                        'Authorization':'Bearer '+signedToken
+                     }
+                };
+
+                var req = https.request(options, (res) => {
+
+                  var body = ""
+                  res.on('data', function(d){body+=d})
+                  res.on('end', function(){
+                    callback("success");
+
+                  });
+                });
+
+                req.on('error', (e) => {
+                  callback(e);
+                });
+
+                req.write(postData);
+                req.end();
+
+
     }
   }
 

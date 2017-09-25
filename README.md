@@ -249,7 +249,7 @@ NOTE: Configuration is all or nothing. If you want to pass configuration options
      console.log(stream)
    }); //Custom configuration
 
-   twitchext.getStream("102705463", function(err, stream){
+   twitchext.getStream("102705463", "8eard7sknnl7a14z92hn33gzi72bt1", function(err, stream){
      if(err){return console.log(err)}
      console.log(stream)
    }); //Default configuration
