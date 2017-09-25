@@ -12,7 +12,8 @@ const default_options = {
 
   },
 
-  "client_id":null
+  "client_id":null,
+  "client_secret": null
 };
 
 
@@ -172,7 +173,7 @@ var options = options || default_options;
 
     getStream: function(user_id, client_id, callback){
                 var client_id = client_id || null;
-
+                console.log(options.client_id)
                 if(typeof client_id == "function"){callback=client_id}
 
                 if(options.client_id != null){
@@ -227,7 +228,7 @@ var options = options || default_options;
 
                 });
 
-                var options = {
+                var reqOpts = {
                   hostname: 'api.twitch.tv',
                   port: 443,
                   path: '/extensions/message/'+channel_id,
@@ -240,7 +241,7 @@ var options = options || default_options;
                      }
                 };
 
-                var req = https.request(options, (res) => {
+                var req = https.request(reqOpts, (res) => {
 
                   var body = ""
                   res.on('data', function(d){body+=d})
@@ -258,6 +259,95 @@ var options = options || default_options;
                 req.end();
 
 
+    },
+
+    oauthReceipt: function(channel_id, signedToken, version, res, client_id, callback){
+
+
+                  var client_id = client_id || null;
+
+                  if(typeof client_id == "function"){callback=client_id}
+
+                  if(options.client_id != null){
+                    client_id = options.client_id
+                  }
+
+
+                  var postData = JSON.stringify({
+
+                        "permissions_received": true
+
+                  });
+
+
+                  var reqOpts = {
+                    hostname: 'api.twitch.tv',
+                    port: 443,
+                    path: '/extensions/'+client_id+'/'+version+'/oauth_receipt?channel_id='+channelId,
+                    method: 'PUT',
+                    headers: {
+                          'Client-Id': client_id,
+                          'Content-Type': 'application/json',
+                          'Authorization':'Bearer '+signedToken
+                       }
+                  };
+
+                  var req = https.request(reqOpts, (response) => {
+
+
+                    if(response.statusCode == 204) {
+                      res.send('<script type="text/javascript">window.close()</script>')
+                      callback(null, "success");
+                    } else {
+                      callback("failed",null);
+                    }
+
+
+                  });
+
+                  req.on('error', (e) => {
+                    callback(e,null);
+                  });
+
+                  req.write(postData);
+                  req.end();
+    },
+
+    getAccessToken: function(oauthCode, redirect_uri, client_id, client_secret, callback) {
+      var client_id = client_id || null;
+      var client_secret = client_secret || null;
+
+      if(typeof client_id == "function"){callback=client_id}
+      if(typeof client_secret == "function"){callback=client_secret}
+
+      if(options.client_id != null){
+        client_id = options.client_id
+      }
+
+      if(options.client_secret != null){
+        client_secret = options.client_secret
+      }
+
+
+      var authOptions = {
+        hostname: 'api.twitch.tv',
+        port: 443,
+        path: '/kraken/oauth2/token?client_id='+client_id+'&client_secret='+client_secret+'&code='+oauthCode+'&grant_type=authorization_code&redirect_uri='+redirect_uri,
+        method: "POST"
+      };
+
+      var request = https.request(authOptions, (response) => {
+        response.on('data', (d) => {
+          var accessToken = JSON.parse(d.toString()).access_token;
+                  callback(null, accessToken);
+
+            });
+          });
+
+      request.on('error', (e) => {
+        callback(e, null);
+      });
+      request.end();
     }
   }
 
