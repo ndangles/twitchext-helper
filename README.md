@@ -3,8 +3,7 @@ Node.js: twitchext-helper
 
 Twitchext Helper is a module that exposes functions that helps with creating twitch extensions. This module aims to help keep clean code by taking common tidious tasks and making them a bit simpler.
 <br><br>
-You can also check out the Twitchext-Starter project -> https://github.com/ndangles/Twitchext-Starter
-This project includes backend and frontend folder structure, working example routes and the necessary files to get you started quickly with creating a new extension.
+You can also check out the Twitchext-Starter project (https://github.com/ndangles/Twitchext-Starter). This project includes backend and frontend folder structure, working example routes and the necessary files to get you started quickly with creating a new extension.
 
 Why?
 ----
