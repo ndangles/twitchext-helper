@@ -361,13 +361,3 @@ Note: someMethod(param1, [, param2], [, param3]). [, ] signifies that this could
   });
 
   ```
-
-
-
-
-
-
- Future
- ------
-
- I definitely plan to add more functions as I find useful and have time. Again, this is kind of in a 'beta' phase so definitely looking to greatly improve it.
